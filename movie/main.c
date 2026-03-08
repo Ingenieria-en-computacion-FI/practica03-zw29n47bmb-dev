@@ -6,37 +6,30 @@ int main()
 
     printf("Prueba del TAD Pelicula\n");
 
-    /* TODO
-       Crear una película
-    */
-    Pelicula* p = NULL;
+    /* Crear una película */
+    Pelicula* p = crearPelicula("Inception", 2010, "Ciencia Ficcion");
 
 
-    /* TODO
-       Agregar algunos directores
-    */
+    /* Agregar directores */
+    agregarDirector(p, "Christopher Nolan");
 
 
-    /* TODO
-       Imprimir película
-    */
+    /* Imprimir película */
+    imprimir(p);
 
 
     printf("\nCambiar genero\n");
 
-    /* TODO
-       Cambiar genero
-    */
+    /* Cambiar genero */
+    cambiarGenero(p, "Thriller");
 
 
-    /* TODO
-       Imprimir nuevamente
-    */
+    /* Imprimir nuevamente */
+    imprimir(p);
 
 
-    /* TODO
-       Liberar memoria
-    */
+    /* Liberar memoria */
+    destruir(p);
 
     return 0;
 }
