@@ -2,88 +2,72 @@
 #include <stdlib.h>
 #include "fraccion.h"
 
-/* TODO
-   Definir la estructura Fraccion
-   Debe contener:
-   - numerador
-   - denominador
-*/
-struct Fraccion
-{
-    /* TODO */
+/* Definición de la estructura */
+struct Fraccion{
+    int num;
+    int den;
 };
 
-
-/* TODO
-   Crear una función auxiliar para calcular
-   el máximo común divisor (MCD)
-*/
+/* Función auxiliar para calcular MCD */
 int mcd(int a, int b)
 {
-    /* TODO */
-
-    return 1;
+    if(b == 0)
+        return a;
+    return mcd(b, a % b);
 }
 
-
-/* Crear fracción */
+/* Crear una fracción */
 Fraccion* crearFraccion(int num, int den)
 {
-    /* TODO
-       1 Verificar que el denominador no sea 0
-       2 Reservar memoria con malloc
-       3 Asignar numerador y denominador
-       4 Simplificar la fracción
-       5 Regresar la fracción
-    */
+    if(den == 0)
+    {
+        printf("Error: el denominador no puede ser 0\n");
+        return NULL;
+    }
 
-    return NULL;
+    Fraccion* f = (Fraccion*) malloc(sizeof(Fraccion));
+
+    if(f != NULL)
+    {
+        f->num = num;
+        f->den = den;
+        simplificar(f);
+    }
+
+    return f;
 }
 
-
-/* Simplificar fracción */
+/* Simplificar la fracción */
 void simplificar(Fraccion* f)
 {
-    /* TODO
-       1 Calcular el MCD
-       2 Dividir numerador y denominador entre el MCD
-    */
+    if(f == NULL) return;
+
+    int divisor = mcd(f->num, f->den);
+
+    f->num = f->num / divisor;
+    f->den = f->den / divisor;
 }
 
-
-/* Sumar fracciones */
+/* Sumar dos fracciones */
 Fraccion* sumar(Fraccion* a, Fraccion* b)
 {
-    /* TODO
-       1 Calcular numerador resultante
+    if(a == NULL || b == NULL) return NULL;
 
-          a/b + c/d =
-          (a*d + b*c) / (b*d)
+    int num = a->num * b->den + b->num * a->den;
+    int den = a->den * b->den;
 
-       2 Crear nueva fracción
-       3 Simplificar
-       4 Regresar resultado
-    */
-
-    return NULL;
+    return crearFraccion(num, den);
 }
-
 
 /* Imprimir fracción */
 void imprimir(Fraccion* f)
 {
-    /* TODO
-       Imprimir en formato:
-
-       numerador/denominador
-    */
+    if(f != NULL)
+        printf("%d/%d\n", f->num, f->den);
 }
-
 
 /* Liberar memoria */
 void destruir(Fraccion* f)
 {
-    /* TODO
-       Liberar memoria con free
-    */
+    free(f);
 }
